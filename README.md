@@ -1,5 +1,5 @@
 # CLI
-You can use this tool to comunicate and work with nipo
+You can use this tool to comunicate and work with nipo.
 
 Syntax : `nipocli -t TOKEN -s SERVER -p PORT`
 
