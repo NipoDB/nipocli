@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"bufio"
 	"os"
-	"nipo"
+	"github.com/NipoDB/nipolib"
 	"strings"
 )
 
-func checkCmd(cmd string, config *nipo.Config) string {
+func checkCmd(cmd string, config *nipolib.Config) string {
 	cmdFields := strings.Fields(cmd)
     result := ""
 	if len(cmdFields) == 1 && cmdFields[0] == "ping" {
-		result,_ = nipo.Ping(config)
+		result,_ = nipolib.Ping(config)
 	}
 	if len(cmdFields) == 1 && cmdFields[0] == "status" {
-		result,_ = nipo.Status(config)
+		result,_ = nipolib.Status(config)
 	}
     if len(cmdFields) >= 2 {
         switch cmdFields[0] {
@@ -24,33 +24,33 @@ func checkCmd(cmd string, config *nipo.Config) string {
 			for count:=2 ; count < len(cmdFields); count++ {
 				value += cmdFields[count]+" "
 			}
-            result,_ = nipo.Set(config, cmdFields[1], value)
+            result,_ = nipolib.Set(config, cmdFields[1], value)
             break
         case "get":
 			keys := ""
 			for count:=1 ; count < len(cmdFields); count++ {
 				keys += cmdFields[count]+" "
 			}
-            result,_ = nipo.Get(config, keys)
+            result,_ = nipolib.Get(config, keys)
             break
 		case "sum":
-            result,_ = nipo.Sum(config, cmdFields[1])
+            result,_ = nipolib.Sum(config, cmdFields[1])
 			break
         case "select":
-            result,_ = nipo.Select(config, cmdFields[1])
+            result,_ = nipolib.Select(config, cmdFields[1])
             break
         case "avg":
-            result,_ = nipo.Avg(config, cmdFields[1])
+            result,_ = nipolib.Avg(config, cmdFields[1])
 			break
 		case "count":
-            result,_ = nipo.Count(config, cmdFields[1])
+            result,_ = nipolib.Count(config, cmdFields[1])
 			break
         }
     } 
 	return result
 }
 
-func Start(config *nipo.Config) {
+func Start(config *nipolib.Config) {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Woclome to nipo")
 	for {
