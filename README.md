@@ -24,7 +24,7 @@ Syntax : `status`
 **Examples**
 
     nipo > status
-    { { id : 1 , ip : 127.0.0.1 , status : unhealthy , checkedat : 2021-03-20 19:57:01.614 },{ id : 2 , ip : 127.0.0.1 , status : unhealthy , checkedat : 2021-03-20 19:57:01.614 } }
+    { "1" : { "ip" : "127.0.0.1" , "status" : "unhealthy" , "checkedat" : "2021-04-02 16:20:17.956" },"2" : { "ip" : "127.0.0.1" , "status" : "unhealthy" , "checkedat" : "2021-04-02 16:20:17.956" } }
 
 
 ## set
