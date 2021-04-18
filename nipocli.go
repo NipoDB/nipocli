@@ -11,11 +11,18 @@ import (
 func checkCmd(cmd string, config *nipolib.Config) string {
 	cmdFields := strings.Fields(cmd)
     result := ""
+	ok := false
 	if len(cmdFields) == 1 && cmdFields[0] == "ping" {
-		result,_ = nipolib.Ping(config)
+		result,ok = nipolib.Ping(config)
+		if !ok {
+			fmt.Println("Error on connecting to server ");
+		}
 	}
 	if len(cmdFields) == 1 && cmdFields[0] == "status" {
-		result,_ = nipolib.Status(config)
+		result,ok = nipolib.Status(config)
+		if !ok {
+			fmt.Println("Error on connecting to server ");
+		}
 	}
     if len(cmdFields) >= 2 {
         switch cmdFields[0] {
@@ -24,26 +31,44 @@ func checkCmd(cmd string, config *nipolib.Config) string {
 			for count:=2 ; count < len(cmdFields); count++ {
 				value += cmdFields[count]+" "
 			}
-            result,_ = nipolib.Set(config, cmdFields[1], value)
+            result,ok = nipolib.Set(config, cmdFields[1], value)
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
             break
         case "get":
 			keys := ""
 			for count:=1 ; count < len(cmdFields); count++ {
 				keys += cmdFields[count]+" "
 			}
-            result,_ = nipolib.Get(config, keys)
+            result,ok = nipolib.Get(config, keys)
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
             break
 		case "sum":
-            result,_ = nipolib.Sum(config, cmdFields[1])
+            result,ok = nipolib.Sum(config, cmdFields[1])
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
 			break
         case "select":
-            result,_ = nipolib.Select(config, cmdFields[1])
+            result,ok = nipolib.Select(config, cmdFields[1])
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
             break
         case "avg":
-            result,_ = nipolib.Avg(config, cmdFields[1])
+            result,ok = nipolib.Avg(config, cmdFields[1])
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
 			break
 		case "count":
-            result,_ = nipolib.Count(config, cmdFields[1])
+            result,ok = nipolib.Count(config, cmdFields[1])
+			if !ok {
+				fmt.Println("Error on connecting to server ");
+			}
 			break
         }
     } 
